@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.team-member-image {
+    width: 100px; /* Set your preferred width */
+    height: 100px; /* Set your preferred height */
+    object-fit: cover; /* Adjust object-fit property as needed */
+  }
