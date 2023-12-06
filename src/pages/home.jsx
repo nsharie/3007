@@ -179,10 +179,10 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo fugit maxime 
           <form ref={form} className=" mx-auto w-full mt-12 lg:w-5/12">
 
             <div className="mb-8 flex gap-8">
-              <Input variant="outlined" size="lg" label="Full Name" />
-              <Input variant="outlined" size="lg" label="Email Address" />
+              <Input variant="outlined" size="lg" label="Full Name" name="name"/>
+              <Input variant="outlined" size="lg" label="Email Address" name="email"/>
             </div>
-            <Textarea variant="outlined" size="lg" label="Message" rows={8} />
+            <Textarea variant="outlined" size="lg" label="Message" rows={8} name="message"/>
             {/* <Checkbox
               label={
                 <Typography
