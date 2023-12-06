@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef, useState} from "react";
 import {
   Card,
   CardBody,
@@ -10,12 +10,29 @@ import {
   Textarea,
   Checkbox,
 } from "@material-tailwind/react";
+import emailjs from '@emailjs/browser';
 import { FingerPrintIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
 import { FeatureCard, TeamCard } from "@/widgets/cards";
 import { featuresData, teamData, contactData } from "@/data";
 
 export function Home() {
+  const form = useRef();
+  const [disable,setDisable]=useState(0);
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_yo6o40k', 'template_aew794h', form.current, 'kmEWi3oG8D-NPRuXS')
+      .then((result) => {
+          console.log(result.text);
+          alert("Form Submitted");
+          setDisable(1);
+          e.target.reset();
+      }, (error) => {
+          console.log(error.text);
+          setDisable(1);
+      });
+  };
   return (
     <>
       <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
@@ -159,7 +176,8 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo fugit maxime 
           <PageTitle section="Contact Us" heading="Want to work with us?">
             Complete this form and we will get back to you in 24 hours.
           </PageTitle>
-          <form className="mx-auto w-full mt-12 lg:w-5/12">
+          <form ref={form} className=" mx-auto w-full mt-12 lg:w-5/12">
+
             <div className="mb-8 flex gap-8">
               <Input variant="outlined" size="lg" label="Full Name" />
               <Input variant="outlined" size="lg" label="Email Address" />
@@ -183,7 +201,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo fugit maxime 
               }
               containerProps={{ className: "-ml-2.5" }}
             /> */}
-            <Button variant="gradient" size="lg" className="mt-8" fullWidth>
+            <Button variant="gradient" size="lg" className="mt-8" fullWidth disabled ={disable} onClick={sendEmail}>
               Send Message
             </Button>
           </form>
